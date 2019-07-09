@@ -21,8 +21,20 @@ function App() {
 
   let [toShow, setToShow] = useState(3)
 
+  let initialStyle = {
+    flexDirection: 'row',
+  }
+
+  let [style, setStyle] = useState(initialStyle)
+
   const editBoxes = (a) => {
     setToShow(toShow+a)
+  }
+
+  const editStyle = (dir) => {
+    let editedStyle = Object.assign({} ,style)
+    editedStyle.flexDirection = dir
+    setStyle(editedStyle)
   }
 
   const Box = (props) => {
@@ -31,7 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="boxContainer">
+      <div className="boxContainer" style={style}>
         {boxes.map((item,i) => {
           if (i < toShow){
             return <Box key={i} class={item.class} face={item.face}/>
@@ -40,6 +52,12 @@ function App() {
         })}
       </div>
       <div className="controls">
+        <div className="btn-group">
+          <button onClick={() => editStyle('row')}>row</button>
+          <button onClick={() => editStyle('row-reverse')}>row-reverse</button>
+          <button onClick={() => editStyle('column')}>column</button>
+          <button onClick={() => editStyle('column-reverse')}>column-reverse</button>
+        </div>
         <button onClick={toShow < boxes.length ?()=> editBoxes(1) : null}>+</button>
         <button onClick={toShow > 1 ?()=> editBoxes(-1) : null}>-</button>
       </div>
