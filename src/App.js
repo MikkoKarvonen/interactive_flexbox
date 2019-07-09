@@ -19,6 +19,13 @@ function App() {
     face: "˘▾˘"
   }]
 
+  const flexDirections = [
+    'row',
+    'row-reverse',
+    'column',
+    'column-reverse'
+  ]
+
   let [toShow, setToShow] = useState(3)
 
   let initialStyle = {
@@ -41,6 +48,10 @@ function App() {
     return <div className={`box ${props.class}`}>{props.face}</div>
   }
 
+  const Button = (props) => {
+    return <button onClick={() => editStyle(props.style)}>{props.style}</button>
+  }
+
   return (
     <div className="App">
       <div className="boxContainer" style={style}>
@@ -53,10 +64,9 @@ function App() {
       </div>
       <div className="controls">
         <div className="btn-group">
-          <button onClick={() => editStyle('row')}>row</button>
-          <button onClick={() => editStyle('row-reverse')}>row-reverse</button>
-          <button onClick={() => editStyle('column')}>column</button>
-          <button onClick={() => editStyle('column-reverse')}>column-reverse</button>
+          {flexDirections.map((item, i)=>{
+            return <Button key={i} style={item}/>
+          })}
         </div>
         <button onClick={toShow < boxes.length ?()=> editBoxes(1) : null}>+</button>
         <button onClick={toShow > 1 ?()=> editBoxes(-1) : null}>-</button>
