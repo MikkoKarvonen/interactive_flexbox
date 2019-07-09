@@ -26,10 +26,17 @@ function App() {
     'column-reverse'
   ]
 
+  const flexWraps = [
+    'nowrap',
+    'wrap',
+    'wrap-reverse'
+  ]
+
   let [toShow, setToShow] = useState(3)
 
   let initialStyle = {
     flexDirection: 'row',
+    flexWrap: 'nowrap',
   }
 
   let [style, setStyle] = useState(initialStyle)
@@ -38,9 +45,9 @@ function App() {
     setToShow(toShow+a)
   }
 
-  const editStyle = (dir) => {
+  const editStyle = (property, value) => {
     let editedStyle = Object.assign({} ,style)
-    editedStyle.flexDirection = dir
+    editedStyle[property] = value
     setStyle(editedStyle)
   }
 
@@ -49,7 +56,7 @@ function App() {
   }
 
   const Button = (props) => {
-    return <button onClick={() => editStyle(props.style)}>{props.style}</button>
+    return <button onClick={() => editStyle(props.property, props.style)}>{props.style}</button>
   }
 
   return (
@@ -65,7 +72,12 @@ function App() {
       <div className="controls">
         <div className="btn-group">
           {flexDirections.map((item, i)=>{
-            return <Button key={i} style={item}/>
+            return <Button key={i} property={'flexDirection'} style={item}/>
+          })}
+        </div>
+        <div className="btn-group">
+          {flexWraps.map((item, i)=>{
+            return <Button key={i} property={'flexWrap'} style={item}/>
           })}
         </div>
         <button onClick={toShow < boxes.length ?()=> editBoxes(1) : null}>+</button>
