@@ -19,17 +19,24 @@ function App() {
     face: "˘▾˘"
   }]
 
-  const flexDirections = [
-    'row',
-    'row-reverse',
-    'column',
-    'column-reverse'
-  ]
-
-  const flexWraps = [
-    'nowrap',
-    'wrap',
-    'wrap-reverse'
+  const flexValues = [
+    {
+      name: 'flexDirection',
+      values: [
+        'row',
+        'row-reverse',
+        'column',
+        'column-reverse'
+      ]
+    },
+    {
+      name: 'flexWrap',
+      values: [
+        'nowrap',
+        'wrap',
+        'wrap-reverse' 
+      ]
+    }
   ]
 
   let [toShow, setToShow] = useState(3)
@@ -70,16 +77,15 @@ function App() {
         })}
       </div>
       <div className="controls">
-        <div className="btn-group">
-          {flexDirections.map((item, i)=>{
-            return <Button key={i} property={'flexDirection'} style={item}/>
-          })}
-        </div>
-        <div className="btn-group">
-          {flexWraps.map((item, i)=>{
-            return <Button key={i} property={'flexWrap'} style={item}/>
-          })}
-        </div>
+        {flexValues.map((item, i)=>{
+          return (
+            <div key={i} className="btn-group">
+            {item.values.map((value, v)=>{
+              return <Button key={`${i}&${v}`} property={item.name} style={value}/>
+            })}
+            </div>
+          )
+        })}
         <button onClick={toShow < boxes.length ?()=> editBoxes(1) : null}>+</button>
         <button onClick={toShow > 1 ?()=> editBoxes(-1) : null}>-</button>
       </div>
