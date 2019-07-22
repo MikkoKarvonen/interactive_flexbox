@@ -36,6 +36,24 @@ function App() {
         'wrap',
         'wrap-reverse' 
       ]
+    },{
+      name: 'justifyContent',
+      values: [
+        'flex-start',
+        'flex-end',
+        'center',
+        'space-between',
+        'space-around'
+      ]
+    },{
+      name: 'alignItems',
+      values: [
+        'stretch',
+        'center',
+        'flex-start',
+        'flex-end',
+        'baseline'
+      ]
     }
   ]
 
