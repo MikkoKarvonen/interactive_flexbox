@@ -22,6 +22,7 @@ function App() {
   const flexValues = [
     {
       name: 'flexDirection',
+      displayName: 'Flex Direction',
       values: [
         'row',
         'row-reverse',
@@ -31,6 +32,7 @@ function App() {
     },
     {
       name: 'flexWrap',
+      displayName: 'Flex Wrap',
       values: [
         'nowrap',
         'wrap',
@@ -38,6 +40,7 @@ function App() {
       ]
     },{
       name: 'justifyContent',
+      displayName: 'Justify Content',
       values: [
         'flex-start',
         'flex-end',
@@ -47,6 +50,7 @@ function App() {
       ]
     },{
       name: 'alignItems',
+      displayName: 'Align Items',
       values: [
         'stretch',
         'center',
@@ -98,6 +102,7 @@ function App() {
         {flexValues.map((item, i)=>{
           return (
             <div key={i} className="btn-group">
+            <p>{item.displayName}</p>
             {item.values.map((value, v)=>{
               return <Button key={`${i}&${v}`} property={item.name} style={value}/>
             })}
